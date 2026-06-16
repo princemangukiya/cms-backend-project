@@ -1,6 +1,7 @@
 package com.college.cms.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty; // Yeh import add karein
 
 @Entity
 @Table(name = "result_detail")
@@ -10,19 +11,26 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long result_id;
 
+    @JsonProperty("grade")
     private String grade;
+
+    @JsonProperty("status")
     private String status;
+
+    @JsonProperty("totalMarks") // Frontend ke "totalMarks" ko map karega
+    @Column(name = "total_marks")
     private Integer total_marks;
 
+    @JsonProperty("student")
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
+    @JsonProperty("subject")
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    // Default Constructor (JPA ke liye zaroori hai)
     public Result() {}
 
     // --- Getters ---
