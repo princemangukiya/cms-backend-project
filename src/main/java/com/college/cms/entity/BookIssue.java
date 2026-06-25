@@ -11,6 +11,7 @@ public class BookIssue {
     @Column(name = "issue_id")
     private Long issueId;
 
+    // Foreign Keys ke liye mapping
     @Column(name = "book_id")
     private Long bookId;
 
@@ -23,7 +24,7 @@ public class BookIssue {
     private Double fine;
     private String reason;
 
-    // Getters and Setters (Ab camelCase use karein)
+    // Getters and Setters
     public Long getIssueId() { return issueId; }
     public void setIssueId(Long issueId) { this.issueId = issueId; }
     public Long getBookId() { return bookId; }

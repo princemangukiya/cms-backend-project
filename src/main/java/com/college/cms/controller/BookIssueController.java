@@ -13,14 +13,17 @@ public class BookIssueController {
 
     @Autowired
     private BookIssueService service;
-
     @PostMapping
-    public ResponseEntity<String> saveBookIssue(@RequestBody BookIssue bookIssue) {
+    public ResponseEntity<?> saveBookIssue(@RequestBody BookIssue bookIssue) {
         try {
+            // Basic validation
+            if (bookIssue.getBookId() == null || bookIssue.getUserId() == null) {
+                return ResponseEntity.badRequest().body("Book ID and User ID are required.");
+            }
             service.saveBookIssue(bookIssue);
             return ResponseEntity.ok("Book Issued Successfully!");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Database Error: Check if Book ID/User ID exist.");
         }
     }
 }
