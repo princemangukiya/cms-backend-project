@@ -13,8 +13,7 @@ public class SubjectServiceImpl implements SubjectService {
     private SubjectRepository subjectRepository;
 
     @Override
-    public void saveSubject(Subject subject) {
-        // Database mein data save hoga
-        subjectRepository.save(subject);
+    public Subject saveSubject(Subject subject) {
+        return subjectRepository.save(subject);
     }
 }
