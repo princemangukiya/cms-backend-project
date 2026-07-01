@@ -16,4 +16,10 @@ public class CourseServiceImpl implements CourseService {
     public Course saveCourse(Course course) {
         return courseRepository.save(course);
     }
+
+    @Override
+    public Course getCourseById(Integer courseId) {
+        return courseRepository.findById(courseId).orElse(null);
+    }
+
 }

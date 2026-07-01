@@ -9,19 +9,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/feedback")
-@CrossOrigin(origins = "http://localhost:5173") // Aapke React ka port
+@CrossOrigin(origins = "*")
 public class FeedbackController {
 
     @Autowired
     private FeedbackService feedbackService;
 
-    @PostMapping("/save")
-    public Feedback createFeedback(@RequestBody Feedback feedback) {
+    @PostMapping
+    public Feedback saveFeedback(@RequestBody Feedback feedback) {
         return feedbackService.saveFeedback(feedback);
     }
 
-    @GetMapping("/all")
-    public List<Feedback> getAll() {
+    @GetMapping
+    public List<Feedback> getAllFeedback() {
         return feedbackService.getAllFeedback();
+    }
+
+    @GetMapping("/{id}")
+    public Feedback getFeedbackById(@PathVariable Integer id) {
+        return feedbackService.getFeedbackById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Feedback updateFeedback(@PathVariable Integer id,
+                                   @RequestBody Feedback feedback) {
+        return feedbackService.updateFeedback(id, feedback);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteFeedback(@PathVariable Integer id) {
+        feedbackService.deleteFeedback(id);
+        return "Feedback Deleted Successfully";
     }
 }
